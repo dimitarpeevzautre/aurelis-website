@@ -1,5 +1,12 @@
 name: Deploy to GitHub Pages
 
+# Pages is configured to serve from the gh-pages branch ("deploy from
+# branch"). This workflow mirrors the source branch to gh-pages on every
+# push; GitHub's pages-build-deployment then publishes it. The
+# actions/deploy-pages approach isn't usable here: the github-pages
+# environment's branch policy only allows gh-pages, and changing that
+# (or the Pages source) requires repo-admin permissions.
+
 on:
   push:
     branches:
@@ -8,31 +15,17 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
   group: pages
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  publish:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-        with:
-          enablement: true
-      - name: Upload site
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: .
-      - name: Deploy
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Mirror to gh-pages
+        run: git push --force origin HEAD:refs/heads/gh-pages
