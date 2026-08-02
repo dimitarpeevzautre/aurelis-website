@@ -277,18 +277,22 @@
         </div>
       </div>
       <div class="reserve-box">
-        <form id="reserve-form">
+        <form id="reserve-form" action="https://formsubmit.co/info@aurelis.mobile" method="POST">
           <div class="eyebrow-yellow">REGISTER INTEREST</div>
           <div class="reserve-fields">
-            <input id="reserve-name" placeholder="Full name" autocomplete="name">
-            <input id="reserve-email" placeholder="Email" type="email" autocomplete="email" required>
-            <select id="reserve-trim">
+            <input id="reserve-name" name="name" placeholder="Full name" autocomplete="name">
+            <input id="reserve-email" name="email" placeholder="Email" type="email" autocomplete="email" required>
+            <select id="reserve-trim" name="trim">
               <option value="undecided">Trim: undecided</option>
               <option value="terra">Terra — 5-seater, from €67,900</option>
               <option value="vista">Vista — 4-seater, from €76,900</option>
               <option value="altus">Altus — comfort 4-seater, from €84,900</option>
             </select>
           </div>
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
+          <input type="hidden" name="_subject" value="New Aurelis One inquiry">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
           <button type="submit" class="btn-submit">Register interest</button>
           <div class="fine-print">No payment · No commitment · We'll only email you about your Aurelis One</div>
         </form>
@@ -342,14 +346,41 @@
 
 </div>
 <script>
-  // No payment backend yet: the form swaps to the design's confirmation state.
-  document.getElementById('reserve-form').addEventListener('submit', function (e) {
-    e.preventDefault();
-    var email = document.getElementById('reserve-email').value.trim();
-    if (email) document.getElementById('confirm-email').textContent = email;
-    this.hidden = true;
-    document.getElementById('reserve-confirmation').hidden = false;
-  });
+  // Inquiries are sent to info@aurelis.mobile via FormSubmit's AJAX endpoint,
+  // keeping the inline confirmation. Without JS, the form POSTs normally to
+  // the same address (FormSubmit shows its own thank-you page).
+  (function () {
+    var form = document.getElementById('reserve-form');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var email = document.getElementById('reserve-email').value.trim();
+      var btn = form.querySelector('.btn-submit');
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+      fetch('https://formsubmit.co/ajax/info@aurelis.mobile', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          name: document.getElementById('reserve-name').value.trim(),
+          email: email,
+          trim: document.getElementById('reserve-trim').value,
+          _subject: 'New Aurelis One inquiry',
+          _template: 'table'
+        })
+      }).then(function (r) {
+        if (!r.ok) throw new Error('Request failed');
+        return r.json();
+      }).then(function () {
+        if (email) document.getElementById('confirm-email').textContent = email;
+        form.hidden = true;
+        document.getElementById('reserve-confirmation').hidden = false;
+      }).catch(function () {
+        btn.disabled = false;
+        btn.textContent = 'Register interest';
+        form.querySelector('.fine-print').textContent = 'Something went wrong — please email info@aurelis.mobile directly.';
+      });
+    });
+  })();
 </script>
 </body>
 </html>
