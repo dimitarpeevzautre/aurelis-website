@@ -339,6 +339,218 @@ img {
   opacity: 0.7;
 }
 
+/* ---- Fleets page ---- */
+.fleet-suite {
+  padding: 112px 48px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.fleet-suite h2 {
+  font-family: var(--font-display);
+  font-size: 42px;
+  font-weight: 600;
+  margin: 0 0 12px;
+}
+
+.fleet-suite .suite-intro {
+  font-size: 17px;
+  color: var(--ink-soft);
+  margin: 0 0 56px;
+  max-width: 62ch;
+}
+
+.fleet-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.fleet-card {
+  background: var(--card);
+  border: 1px solid var(--line-soft);
+  border-radius: 16px;
+  padding: 32px;
+}
+
+.fleet-card .fleet-icon {
+  width: 30px;
+  height: 30px;
+  color: var(--purple);
+  margin-bottom: 18px;
+}
+
+.fleet-card h3 {
+  font-family: var(--font-display);
+  font-size: 21px;
+  font-weight: 600;
+  margin: 0 0 10px;
+}
+
+.fleet-card p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+.how-fleet {
+  padding: 0 48px 112px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.how-fleet > h2 {
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.fleet-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-top: 40px;
+}
+
+.fleet-step {
+  border-top: 2px solid var(--ink);
+  padding-top: 20px;
+}
+
+.fleet-step .step-n {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--purple);
+  margin-bottom: 12px;
+}
+
+.fleet-step h3 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+
+.fleet-step p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+.reserve-fields textarea {
+  background: rgba(241, 238, 229, 0.08);
+  border: 1px solid rgba(241, 238, 229, 0.2);
+  border-radius: 10px;
+  padding: 14px 16px;
+  color: var(--bg);
+  font-size: 15px;
+  font-family: var(--font-body);
+  outline: none;
+  resize: vertical;
+  min-height: 88px;
+}
+
+.reserve-fields textarea::placeholder {
+  color: rgba(241, 238, 229, 0.5);
+}
+
+/* ---- Legal / privacy pages ---- */
+.legal {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 24px 112px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+
+.legal h2 {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 40px 0 12px;
+}
+
+.legal p {
+  margin: 0 0 16px;
+}
+
+.legal ul {
+  margin: 0 0 16px;
+  padding-left: 20px;
+}
+
+.legal li {
+  margin-bottom: 8px;
+}
+
+.legal a {
+  color: var(--purple);
+  border-bottom: 1px solid rgba(109, 59, 199, 0.3);
+}
+
+.legal .updated {
+  font-size: 13px;
+  color: var(--ink-muted);
+}
+
+.legal .placeholder {
+  background: rgba(245, 195, 28, 0.22);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--ink);
+}
+
+/* ---- 404 ---- */
+.notfound {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 128px 24px;
+  text-align: center;
+}
+
+.notfound h1 {
+  font-family: var(--font-display);
+  font-size: 52px;
+  font-weight: 700;
+  line-height: 1.05;
+  margin: 0 0 20px;
+  text-wrap: balance;
+}
+
+.notfound p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  max-width: 46ch;
+  margin: 0 auto 32px;
+}
+
+.notfound .cta-actions {
+  justify-content: center;
+}
+
+@media (max-width: 960px) {
+  .fleet-suite {
+    padding: 64px 24px;
+  }
+
+  .how-fleet {
+    padding: 0 24px 64px;
+  }
+
+  .fleet-grid,
+  .fleet-steps {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ---- Footer ---- */
 
 .site-footer {
