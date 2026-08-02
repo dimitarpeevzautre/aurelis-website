@@ -277,7 +277,7 @@
         </div>
       </div>
       <div class="reserve-box">
-        <form id="reserve-form" action="https://formsubmit.co/info@aurelis.mobile" method="POST">
+        <form id="reserve-form" action="https://formsubmit.co/83346857e2a37fc41ebd3b3bbb285df6" method="POST">
           <div class="eyebrow-yellow">REGISTER INTEREST</div>
           <div class="reserve-fields">
             <input id="reserve-name" name="name" placeholder="Full name" autocomplete="name">
@@ -357,7 +357,7 @@
       var btn = form.querySelector('.btn-submit');
       btn.disabled = true;
       btn.textContent = 'Sending…';
-      fetch('https://formsubmit.co/ajax/info@aurelis.mobile', {
+      fetch('https://formsubmit.co/ajax/83346857e2a37fc41ebd3b3bbb285df6', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({
@@ -377,7 +377,7 @@
       }).catch(function () {
         btn.disabled = false;
         btn.textContent = 'Register interest';
-        form.querySelector('.fine-print').textContent = 'Something went wrong — please email info@aurelis.mobile directly.';
+        form.querySelector('.fine-print').textContent = 'Something went wrong — please try again in a moment.';
       });
     });
   })();
