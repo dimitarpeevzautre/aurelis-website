@@ -394,6 +394,24 @@ img {
   margin: 0;
 }
 
+.fleet-card.is-soon .fleet-icon {
+  color: var(--ink-muted);
+}
+
+.fleet-soon {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  background: rgba(38, 32, 62, 0.05);
+  border: 1px solid var(--line);
+  padding: 3px 9px;
+  border-radius: 999px;
+  margin: 0 0 10px;
+}
+
 .how-fleet {
   padding: 0 48px 112px;
   max-width: 1280px;
