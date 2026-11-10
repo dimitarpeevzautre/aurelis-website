@@ -1,17 +1,26 @@
 name: Deploy to GitHub Pages
 
 # Pages is configured to serve from the gh-pages branch ("deploy from
-# branch"). This workflow mirrors the source branch to gh-pages on every
-# push; GitHub's pages-build-deployment then publishes it. The
-# actions/deploy-pages approach isn't usable here: the github-pages
-# environment's branch policy only allows gh-pages, and changing that
-# (or the Pages source) requires repo-admin permissions.
+# branch"). On every push this workflow assembles ONLY the public site files
+# (an allowlist, see "Assemble site" below) into a single orphan commit and
+# publishes it to gh-pages; GitHub's pages-build-deployment then serves it.
+# Repo internals (.github/, docs/, README, .gitignore) are never published.
+#
+# gh-pages is a build-output branch: every deploy replaces it with a fresh
+# commit generated from the source branch, so its history carries no value.
+#
+# The actions/deploy-pages approach isn't used here: the github-pages
+# environment's branch policy only allows gh-pages, and changing that (or the
+# Pages source) requires repo-admin permissions.
+#
+# When adding a new top-level directory or file type to the site, add it to
+# the allowlist in "Assemble site".
 
 on:
   push:
     branches:
-      - claude/vw-california-camper-site-151wk2
       - main
+      - claude/vw-california-camper-site-151wk2
   workflow_dispatch:
 
 permissions:
@@ -27,5 +36,39 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Mirror to gh-pages
-        run: git push --force origin HEAD:refs/heads/gh-pages
+
+      - name: Assemble site
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/site"
+          # Directories that make up the site.
+          for dir in css js fonts images; do
+            if [ -d "$dir" ]; then cp -R "$dir" "$RUNNER_TEMP/site/"; fi
+          done
+          # Top-level files: pages, icons, and the files Pages/crawlers need.
+          shopt -s nullglob
+          cp *.html *.png *.svg *.ico *.webmanifest robots.txt sitemap.xml CNAME .nojekyll "$RUNNER_TEMP/site/"
+          test -f "$RUNNER_TEMP/site/index.html"
+          test -f "$RUNNER_TEMP/site/CNAME"
+          echo "Publishing:"; (cd "$RUNNER_TEMP/site" && find . -type f | sort)
+
+      - name: Publish to gh-pages
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          export GIT_INDEX_FILE="$RUNNER_TEMP/site.index"
+          git --work-tree="$RUNNER_TEMP/site" add -A .
+          tree=$(git write-tree)
+          commit=$(git commit-tree "$tree" -m "Deploy ${GITHUB_SHA}")
+          unset GIT_INDEX_FILE
+          if git push --force origin "$commit:refs/heads/gh-pages"; then
+            echo "Published site-only tree $commit"
+          else
+            # Safety net so the site keeps deploying: if GitHub rejects the
+            # site-only commit (for example because the built-in token may not
+            # remove .github/workflows from gh-pages), mirror the source tree
+            # as before and flag it.
+            echo "::warning::Site-only publish was rejected; fell back to mirroring the full source tree. See README > Deploy."
+            git push --force origin HEAD:refs/heads/gh-pages
+          fi

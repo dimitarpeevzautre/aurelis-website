@@ -1,0 +1,18 @@
+# OS / editor clutter
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+.vscode/
+.idea/
+
+# Local tooling (the site itself has no build step)
+node_modules/
+__pycache__/
+.env
+.env.*
+
+# Local preview / scratch output
+_site/
+*.log
