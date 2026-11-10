@@ -72,7 +72,9 @@
 
   <section class="home-hero">
     <picture>
+      <source media="(max-width: 640px)" type="image/webp" srcset="images/hero-galley-mobile-640.webp 640w, images/hero-galley-mobile-900.webp 900w" sizes="100vw" width="900" height="1200">
       <source media="(max-width: 640px)" srcset="images/hero-galley-mobile.jpg" width="900" height="1200">
+      <source type="image/webp" srcset="images/galley-pv5-640.webp 640w, images/galley-pv5-1024.webp 1024w, images/galley-pv5-1600.webp 1600w" sizes="100vw">
       <img src="images/galley-pv5.jpg" alt="The Aurelis One with its pop-top raised and sliding door open onto the galley" fetchpriority="high" decoding="async" width="1600" height="1200">
     </picture>
     <span class="render-note">Design render</span>
@@ -113,7 +115,10 @@
   <section class="features">
     <div class="feature-row">
       <div class="feature-media">
-        <img src="images/poptop-pv5-passenger.jpg" alt="The Aurelis One with its pop-top raised and the sliding door open" loading="lazy">
+        <picture>
+          <source type="image/webp" srcset="images/poptop-pv5-passenger-640.webp 640w, images/poptop-pv5-passenger-1024.webp 1024w, images/poptop-pv5-passenger-1600.webp 1600w, images/poptop-pv5-passenger-2000.webp 2000w" sizes="(max-width: 960px) 100vw, 640px">
+          <img src="images/poptop-pv5-passenger.jpg" alt="The Aurelis One with its pop-top raised and the sliding door open" loading="lazy" width="2000" height="1500">
+        </picture>
         <span class="render-note">Design render</span>
       </div>
       <div class="feature-body">
@@ -134,7 +139,10 @@
     </div>
     <div class="feature-row reverse">
       <div class="feature-media">
-        <img src="images/cooking-pv5.jpg" alt="Cooking on the dual-zone induction hob in the all-electric galley" loading="lazy">
+        <picture>
+          <source type="image/webp" srcset="images/cooking-pv5-640.webp 640w, images/cooking-pv5-1024.webp 1024w, images/cooking-pv5-1600.webp 1600w" sizes="(max-width: 960px) 100vw, 640px">
+          <img src="images/cooking-pv5.jpg" alt="Cooking on the dual-zone induction hob in the all-electric galley" loading="lazy" width="1600" height="890">
+        </picture>
         <span class="render-note">Design render</span>
       </div>
       <div class="feature-body">
@@ -155,7 +163,7 @@
     </div>
     <div class="feature-row">
       <div class="feature-media">
-        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Kia%20PV5%20Passenger%20SW1%20Soft%20Mint%20(3).jpg?width=1600" alt="Passenger cabin with the sliding door open, showing the flat floor and seats" loading="lazy">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Kia%20PV5%20Passenger%20SW1%20Soft%20Mint%20(3).jpg?width=1600" srcset="https://commons.wikimedia.org/wiki/Special:FilePath/Kia%20PV5%20Passenger%20SW1%20Soft%20Mint%20(3).jpg?width=800 800w, https://commons.wikimedia.org/wiki/Special:FilePath/Kia%20PV5%20Passenger%20SW1%20Soft%20Mint%20(3).jpg?width=1600 1600w" sizes="(max-width: 960px) 100vw, 640px" alt="Passenger cabin with the sliding door open, showing the flat floor and seats" loading="lazy" width="1600" height="1199">
         <a class="image-credit" href="https://commons.wikimedia.org/wiki/File:Kia_PV5_Passenger_SW1_Soft_Mint_(3).jpg" target="_blank" rel="noopener">CC BY-SA 4.0 · Wikimedia Commons</a>
       </div>
       <div class="feature-body">
@@ -207,15 +215,24 @@
 
   <section class="gallery gallery-featured">
     <div class="image-frame">
-      <img src="images/camp-scene-pv5.jpg" alt="The Aurelis One at a lakeside camp at dusk, pop-top raised and the interior glowing" loading="lazy">
+      <picture>
+        <source type="image/webp" srcset="images/camp-scene-pv5-640.webp 640w, images/camp-scene-pv5-1024.webp 1024w, images/camp-scene-pv5-1600.webp 1600w" sizes="(max-width: 960px) 100vw, 50vw">
+        <img src="images/camp-scene-pv5.jpg" alt="The Aurelis One at a lakeside camp at dusk, pop-top raised and the interior glowing" loading="lazy" width="1600" height="1012">
+      </picture>
       <span class="render-note">Design render</span>
     </div>
     <div class="image-frame">
-      <img src="images/roof-bed-pv5.jpg" alt="Looking up into the roof bed under the raised pop-top, light through the mesh vents" loading="lazy">
+      <picture>
+        <source type="image/webp" srcset="images/roof-bed-pv5-640.webp 640w, images/roof-bed-pv5-1024.webp 1024w, images/roof-bed-pv5-1200.webp 1200w" sizes="(max-width: 960px) 100vw, 25vw">
+        <img src="images/roof-bed-pv5.jpg" alt="Looking up into the roof bed under the raised pop-top, light through the mesh vents" loading="lazy" width="1200" height="1520">
+      </picture>
       <span class="render-note">Design render</span>
     </div>
     <div class="image-frame">
-      <img src="images/charging-pv5.jpg" alt="The Aurelis One plugged in at a DC fast charger" loading="lazy">
+      <picture>
+        <source type="image/webp" srcset="images/charging-pv5-640.webp 640w, images/charging-pv5-1024.webp 1024w, images/charging-pv5-1200.webp 1200w" sizes="(max-width: 960px) 100vw, 25vw">
+        <img src="images/charging-pv5.jpg" alt="The Aurelis One plugged in at a DC fast charger" loading="lazy" width="1200" height="1520">
+      </picture>
       <span class="render-note">Design render</span>
     </div>
   </section>
