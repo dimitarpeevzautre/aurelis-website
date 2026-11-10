@@ -20,7 +20,6 @@ on:
   push:
     branches:
       - main
-      - claude/vw-california-camper-site-151wk2
   workflow_dispatch:
 
 permissions:
