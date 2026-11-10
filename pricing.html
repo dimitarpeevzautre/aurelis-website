@@ -280,7 +280,7 @@
         </div>
       </div>
       <div class="reserve-box">
-        <form id="reserve-form" action="https://formsubmit.co/83346857e2a37fc41ebd3b3bbb285df6" method="POST">
+        <form id="reserve-form" data-enquiry-form data-confirmation="reserve-confirmation" data-confirm-email="confirm-email" action="https://formsubmit.co/83346857e2a37fc41ebd3b3bbb285df6" method="POST">
           <div class="eyebrow-yellow">REGISTER INTEREST</div>
           <div class="reserve-fields">
             <input id="reserve-name" name="name" placeholder="Full name" autocomplete="name">
@@ -351,42 +351,6 @@
   </footer>
 
 </div>
-<script>
-  // Inquiries are sent to the configured inbox via FormSubmit's AJAX endpoint,
-  // keeping the inline confirmation. Without JS, the form POSTs normally to
-  // the same address (FormSubmit shows its own thank-you page).
-  (function () {
-    var form = document.getElementById('reserve-form');
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var email = document.getElementById('reserve-email').value.trim();
-      var btn = form.querySelector('.btn-submit');
-      btn.disabled = true;
-      btn.textContent = 'Sending…';
-      fetch('https://formsubmit.co/ajax/83346857e2a37fc41ebd3b3bbb285df6', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          name: document.getElementById('reserve-name').value.trim(),
-          email: email,
-          trim: document.getElementById('reserve-trim').value,
-          _subject: 'New Aurelis One inquiry',
-          _template: 'table'
-        })
-      }).then(function (r) {
-        if (!r.ok) throw new Error('Request failed');
-        return r.json();
-      }).then(function () {
-        if (email) document.getElementById('confirm-email').textContent = email;
-        form.hidden = true;
-        document.getElementById('reserve-confirmation').hidden = false;
-      }).catch(function () {
-        btn.disabled = false;
-        btn.textContent = 'Register interest';
-        form.querySelector('.fine-print').textContent = 'Something went wrong — please try again in a moment.';
-      });
-    });
-  })();
-</script>
+<script src="js/enquiry-form.js" defer></script>
 </body>
 </html>
